@@ -1,9 +1,19 @@
 // import './App.css'
-import { useState , useEffect, use } from 'react'
+// import SingleSongUnit from '../components/single_song_unit.jsx'
+import SingleSongUnit from '../components/single_song_unit.jsx';
+import { useState , useEffect } from 'react'
+import { ShowB50 } from './b50_visualizer.js'
+
+
+var userInfo = null;
+var scoreData = null;
+var b50 = [];
 
 function App() {
     const [msg, setMsg] = useState('正在讀取資料...');
-    const [dataSong, setDataSong] = useState(null);
+    const [result, setResult] = useState(false);
+    // const [userInfo, setUserInfo] = useState(null);
+    // const [songsData, setSongsData] = useState(null);
 
 
     useEffect(() => {
@@ -15,7 +25,13 @@ function App() {
             const {type, data} = event.data;
             if (type === 'result'){
                 //console.log(data[0]);
-                setDataSong(data[0]);
+                userInfo = data[0];
+                scoreData = data[1];
+
+                b50 = ShowB50(scoreData);
+
+                setMsg('資料讀取完成');
+                setResult(true);
             }
         });
 
@@ -25,7 +41,32 @@ function App() {
         <>
             <h1>Main Page</h1>
             <div id="readingData">{msg}</div>
-            <div id="result">{dataSong !== null ? dataSong.name : "nothing"}</div>
+            {result &&
+                <>
+                    <div id="user_name">{userInfo.name}</div>
+                    <div id="user_rating">{userInfo.rating}</div>
+                </>
+            }
+            {result &&
+                <>
+                    <div id="new_song_list">
+                        <h2>new songs</h2>
+                        {b50[0].map((song, index) => {
+                            return (
+                                <SingleSongUnit song={song} index={index}/>
+                            )
+                        })}
+                    </div>
+                    <div id="old_song_list">
+                        <h2>old songs</h2>
+                        {b50[1].map((song, index) => {
+                            return (
+                                <SingleSongUnit song={song} index={index}/>
+                            )
+                        })}
+                    </div>
+                </>
+            }
         </>
     )
 }
