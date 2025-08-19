@@ -97,7 +97,7 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
                     }
 
                 }
-                let s = new Song(title, type, version, score, Difficulties[i], internalLevel, imgURL, apFlag, syncFlag);
+                let s = new Song(title, type.toUpperCase(), version, score, Difficulties[i], internalLevel, imgURL, apFlag, syncFlag);
                 scoreData.push(s);
             })
 

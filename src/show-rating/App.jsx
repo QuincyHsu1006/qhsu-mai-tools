@@ -1,8 +1,9 @@
 // import './App.css'
 // import SingleSongUnit from '../components/single_song_unit.jsx'
-import SingleSongUnit from '../components/single_song_unit.jsx';
+import SingleSongUnit from './single_song_unit.jsx';
 import { useState , useEffect } from 'react'
 import { ShowB50 } from './b50_visualizer.js'
+import './App.css';
 
 
 var userInfo = null;
@@ -44,27 +45,44 @@ function App() {
             {result &&
                 <>
                     <div id="user_name">{userInfo.name}</div>
-                    <div id="user_rating">{userInfo.rating}</div>
+                    <div id="user_rating">Rating: {userInfo.rating}</div>
                 </>
             }
             {result &&
                 <>
-                    <div id="new_song_list">
+                    <div className="whole_chart">
                         <h2>new songs</h2>
-                        {b50[0].map((song, index) => {
-                            return (
-                                <SingleSongUnit song={song} index={index}/>
-                            )
-                        })}
-                    </div>
-                    <div id="old_song_list">
+                        <div id="new_song_list" className="song_list">
+                            {b50[0].map((song, index) => {
+                                return (
+                                    <SingleSongUnit song={song} index={index}/>
+                                )
+                            })}
+                            {
+                                b50[0].length < 15 && Array.from({length: 15 - b50[0].length}).map((_, index) => {
+                                    return (
+                                        <SingleSongUnit song={null} index={index}/>
+                                    )
+                                })
+                            }
+                        </div>
                         <h2>old songs</h2>
-                        {b50[1].map((song, index) => {
-                            return (
-                                <SingleSongUnit song={song} index={index}/>
-                            )
-                        })}
+                        <div id="old_song_list" className="song_list">
+                            {b50[1].map((song, index) => {
+                                return (
+                                    <SingleSongUnit song={song} index={index}/>
+                                )
+                            })}
+                            {
+                                b50[1].length < 35 && Array.from({length: 35 - b50[1].length}).map((_, index) => {
+                                    return (
+                                        <SingleSongUnit song={null} index={index}/>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
+
                 </>
             }
         </>

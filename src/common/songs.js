@@ -17,13 +17,13 @@ export class Song {
         this.title = title;
         this.type = type;
         this.version = version;
-        this.score = score;
+        this.score = score.toFixed(4);
         this.difficulty = difficulty;
-        this.internalLevel = internalLevel;
+        this.internalLevel = internalLevel.toFixed(1);
         this.imgURL = imgURL;
         this.apFlag = apFlag;
         this.syncFlag = syncFlag;
-        this.rating = calculateRating(this.score, this.internalLevel);
+        this.rating = calculateRating(score, internalLevel);
     }
 
 
