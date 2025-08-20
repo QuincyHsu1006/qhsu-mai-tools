@@ -1,5 +1,14 @@
 export const Difficulties = ['basic', 'advanced', 'expert', 'master', 'remaster'];
 
+export const DifficultyColors = {
+    basic: '#6fe163',
+    advanced: '#f8df3a',
+    expert: '#ff828e',
+    master: '#c27ff4',
+    remaster: '#e5ddea',
+    none: '#cccccc'
+}
+
 export const Versions = [
         "maimai", "maimai PLUS", "GreeN", "GreeN PLUS",
         "ORANGE", "ORANGE PLUS", "PiNK", "PiNK PLUS",

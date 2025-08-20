@@ -2,7 +2,7 @@ import { Versions } from "../common/songs.js";
 
 const currentVersion = Versions[Versions.length - 1];
 
-export function ShowB50(scoreData) {
+export function GetB50(scoreData) {
     const [new15, old35] = GetB50Songs(scoreData);
 
     const totalNew15 = GetTotalRating(new15);

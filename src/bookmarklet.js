@@ -21,10 +21,17 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
     }
 
 
+    const fetchSongDict = async () => {
+        if(DataJSON !== null) return DataJSON;
+
+        console.log('Fetching song dict...');
+        DataJSON = await fetchJSON(MAIN_LINK + 'song_data_dict.json');
+    }
+
     const fetchUserInfoData = async () => {
         if (userInfoData !== null) return userInfoData;
 
-        console.log('Fetching user info data...');
+        console.log('Fetching user info...');
         const namePlateDOM = document.querySelector('.see_through_block > .basic_block');
 
         userInfoData = {};
@@ -33,7 +40,6 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
         userInfoData.rating = Number(document.querySelector('.rating_block').textContent);
 
     }
-
 
     const fetchScoreData = async () => {
         if (scoreData !== null) return scoreData;
@@ -102,8 +108,8 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
             })
 
         }
-
     };
+
 
     const openChildWindow = () => {
         document.getElementById('read_data_btn').disabled = true;
@@ -119,9 +125,8 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
     const eventReceiver = async (event) => {
         const {type, data} = event.data;
         if(type === 'ready'){
-            console.log('Fetching song dict data...');
-            DataJSON = await fetchJSON(MAIN_LINK + 'song_data_dict.json');
 
+            await fetchSongDict();
             await fetchUserInfoData();
             await fetchScoreData();
 

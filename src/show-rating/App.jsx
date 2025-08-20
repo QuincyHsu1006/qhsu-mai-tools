@@ -1,9 +1,11 @@
-// import './App.css'
-// import SingleSongUnit from '../components/single_song_unit.jsx'
-import SingleSongUnit from './single_song_unit.jsx';
-import { useState , useEffect } from 'react'
-import { ShowB50 } from './b50_visualizer.js'
 import './App.css';
+import { useState , useEffect } from 'react'
+import { GetB50 } from './get_b50.js'
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import Layout from '../components/layout.jsx';
+import B50Visualizer from '../b50-visualizer/b50_visualizer.jsx';
+import Record from '../record/record.jsx';
+import Plates from '../plates/plates.jsx';
 
 
 var userInfo = null;
@@ -22,14 +24,13 @@ function App() {
         console.log('requiring data...');
 
         window.addEventListener('message', (event) => {
-            console.log('received data, data:', event.data);
             const {type, data} = event.data;
+
             if (type === 'result'){
-                //console.log(data[0]);
                 userInfo = data[0];
                 scoreData = data[1];
 
-                b50 = ShowB50(scoreData);
+                b50 = GetB50(scoreData);
 
                 setMsg('資料讀取完成');
                 setResult(true);
@@ -50,39 +51,15 @@ function App() {
             }
             {result &&
                 <>
-                    <div className="whole_chart">
-                        <h2>new songs</h2>
-                        <div id="new_song_list" className="song_list">
-                            {b50[0].map((song, index) => {
-                                return (
-                                    <SingleSongUnit song={song} index={index}/>
-                                )
-                            })}
-                            {
-                                b50[0].length < 15 && Array.from({length: 15 - b50[0].length}).map((_, index) => {
-                                    return (
-                                        <SingleSongUnit song={null} index={index}/>
-                                    )
-                                })
-                            }
-                        </div>
-                        <h2>old songs</h2>
-                        <div id="old_song_list" className="song_list">
-                            {b50[1].map((song, index) => {
-                                return (
-                                    <SingleSongUnit song={song} index={index}/>
-                                )
-                            })}
-                            {
-                                b50[1].length < 35 && Array.from({length: 35 - b50[1].length}).map((_, index) => {
-                                    return (
-                                        <SingleSongUnit song={null} index={index}/>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
-
+                    <HashRouter>
+                        <Routes>
+                            <Route element={<Layout />}>
+                                <Route path="/" element={<B50Visualizer scoreData={scoreData} b50={b50} />}/>
+                                <Route path="/record" element={<Record scoreData={scoreData} />}/>
+                                <Route path="/plates" element={<Plates scoreData={scoreData} />}/>
+                            </Route>
+                        </Routes>
+                    </HashRouter>
                 </>
             }
         </>
