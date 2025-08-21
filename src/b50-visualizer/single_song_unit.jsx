@@ -9,8 +9,8 @@ function SingleSongUnit({ song, index }) {
                 <div className="img_border">
                     <img className="song_img" src={song.imgURL}/>
                     <div className="song_title wd">{song.title}</div>
-                    <span className="song_type wd">{song.type}  {song.internalLevel}</span>
-                    <span className="song_score wd">{song.score} </span>
+                    <span className="song_type wd">{song.type} | {song.internalLevel.toFixed(1)}</span>
+                    <span className="song_score wd">{song.score.toFixed(4)} </span>
                     <span className="song_rating wd">{song.rating} </span>
                 </div>
             </div>

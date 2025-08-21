@@ -30,6 +30,10 @@ function App() {
                 userInfo = data[0];
                 scoreData = data[1];
 
+                scoreData.sort((a, b) => {return b.internalLevel - a.internalLevel});
+
+                console.log(scoreData[0]);
+
                 b50 = GetB50(scoreData);
 
                 setMsg('資料讀取完成');

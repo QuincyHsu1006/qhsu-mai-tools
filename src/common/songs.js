@@ -26,9 +26,9 @@ export class Song {
         this.title = title;
         this.type = type;
         this.version = version;
-        this.score = score.toFixed(4);
+        this.score = score;
         this.difficulty = difficulty;
-        this.internalLevel = internalLevel.toFixed(1);
+        this.internalLevel = internalLevel;
         this.imgURL = imgURL;
         this.apFlag = apFlag;
         this.syncFlag = syncFlag;
