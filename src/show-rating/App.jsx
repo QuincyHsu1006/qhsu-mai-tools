@@ -15,6 +15,11 @@ var b50 = [];
 function App() {
     const [msg, setMsg] = useState('正在讀取資料...');
     const [result, setResult] = useState(false);
+
+    const [minValue, setMinValue] = useState(14.0);
+    const [maxValue, setMaxValue] = useState(14.5);
+    const [minVtag, setMinVtag] = useState(14.0);
+    const [maxVtag, setMaxVtag] = useState(14.5);
     // const [userInfo, setUserInfo] = useState(null);
     // const [songsData, setSongsData] = useState(null);
 
@@ -31,8 +36,6 @@ function App() {
                 scoreData = data[1];
 
                 scoreData.sort((a, b) => {return b.internalLevel - a.internalLevel});
-
-                console.log(scoreData[0]);
 
                 b50 = GetB50(scoreData);
 
@@ -59,7 +62,10 @@ function App() {
                         <Routes>
                             <Route element={<Layout />}>
                                 <Route path="/" element={<B50Visualizer scoreData={scoreData} b50={b50} />}/>
-                                <Route path="/record" element={<Record scoreData={scoreData} />}/>
+                                <Route path="/record" element={<Record scoreData={scoreData}
+                                    minValue={minValue} maxValue={maxValue} minVtag={minVtag} maxVtag={maxVtag}
+                                    setMinValue={setMinValue} setMaxValue={setMaxValue} setMinVtag={setMinVtag} setMaxVtag={setMaxVtag}
+                                />}/>
                                 <Route path="/plates" element={<Plates scoreData={scoreData} />}/>
                             </Route>
                         </Routes>
