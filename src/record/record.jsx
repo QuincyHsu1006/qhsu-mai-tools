@@ -2,9 +2,13 @@ import {useState, useEffect} from 'react';
 import MultiRangeSlider from "multi-range-slider-react";
 import SquareSongUnit from './square_song_unit';
 import DividerLine from './divider_line';
+import RadioChoice from '../components/radio_choice';
+import { findSongFilterFlagByKey } from '../common/filter';
+import { ScoreAchievements, APAchievements, SyncAchievements } from '../common/songs';
 import './record.css';
 
 function Record({scoreData, minValue, maxValue, minVtag, maxVtag, setMinValue, setMaxValue, setMinVtag, setMaxVtag}) {
+    const [selectedValue, setSelectedValue] = useState("none");
 
     const handleChange = (e) => {
         setMinValue(e.minValue);
@@ -14,8 +18,12 @@ function Record({scoreData, minValue, maxValue, minVtag, maxVtag, setMinValue, s
         setMinVtag(e.minValue.toFixed(1));
         setMaxVtag(e.maxValue.toFixed(1));
     };
+    const handleSelected = (e) => {
+        setSelectedValue(e.target.value);
+    }
 
     let currLevel = (maxValue + 0.1).toFixed(1);
+    let filterFlag = findSongFilterFlagByKey(selectedValue, null);
 
     return (
         <>
@@ -33,6 +41,32 @@ function Record({scoreData, minValue, maxValue, minVtag, maxVtag, setMinValue, s
                 />
                 <div>{maxVtag}</div>
             </div>
+            <div className="achievement_filter">
+                <RadioChoice value={'none'} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
+                {
+                    Object.entries(ScoreAchievements).map(([key, value]) => {
+                        return (
+                            <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
+                        )
+                    })
+                }
+                <br/>
+                {
+                    Object.entries(APAchievements).map(([key, value]) => {
+                        return (
+                            <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
+                        )
+                    })
+                }
+                <br/>
+                {
+                    Object.entries(SyncAchievements).map(([key, value]) => {
+                        return (
+                            <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
+                        )
+                    })
+                }
+            </div>
 
             <div className="whole_list">
                 {
@@ -45,7 +79,7 @@ function Record({scoreData, minValue, maxValue, minVtag, maxVtag, setMinValue, s
                                 </>
                             }
 
-                            <SquareSongUnit song={song} index={index}/>
+                            <SquareSongUnit song={song} filterKey={selectedValue} filterFlag={filterFlag} index={index} />
 
                             </>
                         )

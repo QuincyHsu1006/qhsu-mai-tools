@@ -1,5 +1,39 @@
 export const Difficulties = ['basic', 'advanced', 'expert', 'master', 'remaster'];
 
+export const ScoreAchievements = {
+    'SSS+': 100.5,
+    'SSS': 100,
+    'SS+': 99.5,
+    'SS': 99,
+    'S+': 98,
+    'S': 97,
+    'clear': 80
+}
+
+export const APAchievements = {
+    'AP+': 4,
+    'AP': 3,
+    'FC+': 2,
+    'FC': 1
+}
+
+export const SyncAchievements = {
+    'FDX+': 5,
+    'FDX': 4,
+    'FS+': 3,
+    'FS': 2,
+    'sync': 1
+}
+
+export const StarAchievements = {
+    //'6★': 0.99,
+    '5★': 0.97,
+    '4★': 0.95,
+    '3★': 0.93,
+    '2★': 0.9,
+    '1★': 0.8
+}
+
 export const DifficultyColors = {
     basic: '#6fe163',
     advanced: '#f8df3a',
@@ -23,13 +57,19 @@ export class Song {
     constructor(title, type, version, score, difficulty, internalLevel,
                 imgURL, apFlag, syncFlag
     ) {
+        //type: string
         this.title = title;
         this.type = type;
         this.version = version;
-        this.score = score;
         this.difficulty = difficulty;
-        this.internalLevel = internalLevel;
         this.imgURL = imgURL;
+
+        //type: double
+        this.score = score;
+        this.internalLevel = internalLevel;
+        this.dxScore = null;
+
+        //type: int
         this.apFlag = apFlag;
         this.syncFlag = syncFlag;
         this.rating = calculateRating(score, internalLevel);

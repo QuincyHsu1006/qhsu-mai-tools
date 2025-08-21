@@ -1,4 +1,4 @@
-import { fetchPage, fetchJSON } from './common/common.js';
+import { fetchPage, fetchJSON } from './common/fetch.js';
 import { Versions } from './common/songs.js';
 
 (async () => {

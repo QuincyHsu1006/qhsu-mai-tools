@@ -1,5 +1,5 @@
 import { Song, Difficulties } from './common/songs.js';
-import { fetchPage, fetchJSON } from './common/common.js';
+import { fetchPage, fetchJSON } from './common/fetch.js';
 
 //const MAIN_LINK = 'https://quincyhsu1006.github.io/qhsu-mai-tools/';
 const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
@@ -67,39 +67,39 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
                 const internalLevel = data[Difficulties[i]] || 0;
                 const imgURL = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${data?.imgURL}` || "";
 
-                let apFlag = 'none';
-                let syncFlag = 'none';
+                let apFlag = 0;
+                let syncFlag = 0;
 
                 if(scoreBlk) {
                     const flagBlk = Array.from(block.querySelectorAll('img.h_30.f_r')).map(el => el.src);
 
                     if(flagBlk.some(src => src.includes('music_icon_fc'))){
-                        apFlag = 'fc';
+                        apFlag = 1;
                     }
                     if(flagBlk.some(src => src.includes('music_icon_fcp'))){
-                        apFlag = 'fcp';
+                        apFlag = 2;
                     }
                     if(flagBlk.some(src => src.includes('music_icon_ap'))){
-                        apFlag = 'ap';
+                        apFlag = 3;
                     }
                     if(flagBlk.some(src => src.includes('music_icon_app'))){
-                        apFlag = 'app';
+                        apFlag = 4;
                     }
 
                     if(flagBlk.some(src => src.includes('music_icon_sync'))){
-                        syncFlag = 'sync';
+                        syncFlag = 1;
                     }
                     if(flagBlk.some(src => src.includes('music_icon_fs'))){
-                        syncFlag = 'fs';
+                        syncFlag = 2;
                     }
                     if(flagBlk.some(src => src.includes('music_icon_fsp'))){
-                        syncFlag = 'fsp';
+                        syncFlag = 3;
                     }
                     if(flagBlk.some(src => src.includes('music_icon_fdx'))){
-                        syncFlag = 'fdx';
+                        syncFlag = 4;
                     }
                     if(flagBlk.some(src => src.includes('music_icon_fdxp'))){
-                        syncFlag = 'fdxp';
+                        syncFlag = 5;
                     }
 
                 }
