@@ -13,9 +13,9 @@ export function findSongFilterFlagByKey(key, defaultFlag){
 export function songFilter(song, filterKey, filterFlag){
     if(filterKey === null || filterKey === 'none') return false;
 
-    if(filterFlag !== 'score' ||
-        filterFlag !== 'AP' ||
-        filterFlag !== 'sync' ||
+    if(filterFlag !== 'score' &&
+        filterFlag !== 'AP' &&
+        filterFlag !== 'sync' &&
         filterFlag !== 'ster') filterFlag = 'score';
 
     if(filterFlag === 'score' || filterKey in ScoreAchievements){

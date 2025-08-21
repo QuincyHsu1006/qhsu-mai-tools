@@ -38,3 +38,12 @@
     margin: 2px;
     font-size: 14px;
 }
+
+.square .Achievements{
+    position: absolute;
+    bottom: 0%;
+    right: 10%;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--wdcolor)
+}
