@@ -10,8 +10,15 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
         const namePlate = document.querySelector('.see_through_block');
 
         let buttons = `
-            <div>
-                <button id="read_data_btn">讀取資料</button>
+        <div>
+        <button id="read_data_btn"
+            style="padding: 5px;
+            margin: 0px 0px 7px 0px;
+            border-radius: 7px;
+            border: solid 1px #aaaaaa;
+            background-color: #dcf3ff;
+            box-shadow: 1px 3px 0px rgba(0,0,0,0.4);">
+                讀取資料</button>
             </div>
         `
 
