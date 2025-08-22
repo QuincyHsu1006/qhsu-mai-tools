@@ -16,7 +16,7 @@ export function songFilter(song, filterKey, filterFlag){
     if(filterFlag !== 'score' &&
         filterFlag !== 'AP' &&
         filterFlag !== 'sync' &&
-        filterFlag !== 'ster') filterFlag = 'score';
+        filterFlag !== 'star') filterFlag = 'score';
 
     if(filterFlag === 'score' || filterKey in ScoreAchievements){
         return song.score >= ScoreAchievements[filterKey];

@@ -15,7 +15,7 @@ function SquareSongUnit({song, filterKey, filterFlag}){
                         {filterFlag === 'score' && (song.score >= 0 && song.score.toFixed(4).slice(0, -2))}
                         {filterFlag === 'AP' && Object.keys(APAchievements).find(k => APAchievements[k] === song.apFlag)}
                         {filterFlag === 'sync' && Object.keys(SyncAchievements).find(k => SyncAchievements[k] === song.syncFlag)}
-                        {filterFlag === 'star' && song.dxScore}
+                        {filterFlag === 'star' && (song.dxScore >= 0 && `${song.dxScore}%`)}
                     </div>
                 </div>
             </div>

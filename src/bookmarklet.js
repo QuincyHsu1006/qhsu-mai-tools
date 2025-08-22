@@ -60,11 +60,15 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
                 const scoreBlk = block.querySelector('.music_score_block.w_112');
                 const score = scoreBlk ? Number(scoreBlk.textContent.slice(0, -1)) : -1;
 
+                const dxScoreBlk = block.querySelector('.music_score_block.w_190');
+
+                const dxBefore = dxScoreBlk ? dxScoreBlk.textContent.replace(/[,\s]/g, "").split("/") : [];
+                const dxScore = dxBefore.length > 0 ? Math.floor((Number(dxBefore[0]) / Number(dxBefore[1])) * 10000) / 100 : -1;
 
                 const data = DataJSON.find(d => d.title === title && d.type === type);
 
                 const version = data?.version || "";
-                const internalLevel = data[Difficulties[i]] || 0;
+                const internalLevel = data? data[Difficulties[i]] : 0;
                 const imgURL = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${data?.imgURL}` || "";
 
                 let apFlag = 0;
@@ -103,7 +107,7 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
                     }
 
                 }
-                let s = new Song(title, type.toUpperCase(), version, score, Difficulties[i], internalLevel, imgURL, apFlag, syncFlag);
+                let s = new Song(title, type.toUpperCase(), version, score, dxScore, Difficulties[i], internalLevel, imgURL, apFlag, syncFlag);
                 scoreData.push(s);
             })
 

@@ -4,7 +4,7 @@ import SquareSongUnit from './square_song_unit';
 import DividerLine from './divider_line';
 import RadioChoice from '../components/radio_choice';
 import { findSongFilterFlagByKey } from '../common/filter';
-import { ScoreAchievements, APAchievements, SyncAchievements } from '../common/songs';
+import { ScoreAchievements, APAchievements, SyncAchievements, StarAchievements} from '../common/songs';
 import './record.css';
 
 function Record({scoreData, minValue, maxValue, minVtag, maxVtag, setMinValue, setMaxValue, setMinVtag, setMaxVtag}) {
@@ -61,6 +61,14 @@ function Record({scoreData, minValue, maxValue, minVtag, maxVtag, setMinValue, s
                 <br/>
                 {
                     Object.entries(SyncAchievements).map(([key, value]) => {
+                        return (
+                            <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
+                        )
+                    })
+                }
+                <br/>
+                {
+                    Object.entries(StarAchievements).map(([key, value]) => {
                         return (
                             <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
                         )

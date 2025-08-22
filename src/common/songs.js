@@ -27,11 +27,11 @@ export const SyncAchievements = {
 
 export const StarAchievements = {
     //'6★': 0.99,
-    '5★': 0.97,
-    '4★': 0.95,
-    '3★': 0.93,
-    '2★': 0.9,
-    '1★': 0.8
+    '5★': 97,
+    '4★': 95,
+    '3★': 93,
+    '2★': 90,
+    '1★': 85
 }
 
 export const DifficultyColors = {
@@ -54,7 +54,7 @@ export const Versions = [
     ];
 
 export class Song {
-    constructor(title, type, version, score, difficulty, internalLevel,
+    constructor(title, type, version, score, dxScore, difficulty, internalLevel,
                 imgURL, apFlag, syncFlag
     ) {
         //type: string
@@ -67,7 +67,7 @@ export class Song {
         //type: double
         this.score = score;
         this.internalLevel = internalLevel;
-        this.dxScore = null;
+        this.dxScore = dxScore;
 
         //type: int
         this.apFlag = apFlag;
