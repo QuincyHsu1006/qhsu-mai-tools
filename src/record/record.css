@@ -8,6 +8,11 @@
     align-items: center;
 }
 
+.filter_block {
+    display: flex;
+    justify-content: center;
+}
+
 .whole_list {
     width:1100px;
     display: flex;

@@ -42,38 +42,43 @@ function Record({scoreData, minValue, maxValue, minVtag, maxVtag, setMinValue, s
                 <div>{maxVtag}</div>
             </div>
             <div className="achievement_filter">
-                <RadioChoice value={'none'} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
-                {
-                    Object.entries(ScoreAchievements).map(([key, value]) => {
-                        return (
-                            <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
-                        )
-                    })
-                }
-                <br/>
-                {
-                    Object.entries(APAchievements).map(([key, value]) => {
-                        return (
-                            <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
-                        )
-                    })
-                }
-                <br/>
-                {
-                    Object.entries(SyncAchievements).map(([key, value]) => {
-                        return (
-                            <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
-                        )
-                    })
-                }
-                <br/>
-                {
-                    Object.entries(StarAchievements).map(([key, value]) => {
-                        return (
-                            <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
-                        )
-                    })
-                }
+                <div className="filter_block">
+                    <RadioChoice value={'none'} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
+                    {
+                        Object.entries(ScoreAchievements).map(([key, value]) => {
+                            return (
+                                <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
+                            )
+                        })
+                    }
+                </div>
+                <div className="filter_block">
+                    {
+                        Object.entries(APAchievements).map(([key, value]) => {
+                            return (
+                                <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
+                            )
+                        })
+                    }
+                </div>
+                <div className="filter_block">
+                    {
+                        Object.entries(SyncAchievements).map(([key, value]) => {
+                            return (
+                                <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
+                            )
+                        })
+                    }
+                </div>
+                <div className="filter_block">
+                    {
+                        Object.entries(StarAchievements).map(([key, value]) => {
+                            return (
+                                <RadioChoice value={key} name={'achievements'} state={selectedValue} onchange={handleSelected}/>
+                            )
+                        })
+                    }
+                </div>
             </div>
 
             <div className="whole_list">

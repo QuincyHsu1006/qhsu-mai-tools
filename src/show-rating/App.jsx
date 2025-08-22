@@ -39,7 +39,7 @@ function App() {
 
                 b50 = GetB50(scoreData);
 
-                setMsg('資料讀取完成');
+                //setMsg('資料讀取完成');
                 setResult(true);
             }
         });
@@ -48,8 +48,8 @@ function App() {
 
     return (
         <>
-            <h1>Main Page</h1>
-            <div id="readingData">{msg}</div>
+            <h1>簡易查分小工具</h1>
+            <div className={result ? 'none' : ''}>{msg}</div>
             {result &&
                 <>
                     <div id="user_name">{userInfo.name}</div>
