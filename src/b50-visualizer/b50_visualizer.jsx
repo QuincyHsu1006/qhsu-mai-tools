@@ -6,6 +6,14 @@ function B50Visualizer({scoreData, b50}) {
 
     return (
         <>
+            <div className="whole_chart song_list">
+                <div className="detail">新曲總和：{totalNew15}</div>
+                <div className="detail">舊曲總和：{totalOld35}</div>
+                <div className="detail">全部總和：{totalAll}</div>
+                <div className="detail">新曲平均：{(totalNew15 / new15.length).toFixed(2)}</div>
+                <div className="detail">舊曲平均：{(totalOld35 / old35.length).toFixed(2)}</div>
+                <div className="detail">總平均：{(totalAll / (new15.length + old35.length)).toFixed(2)}</div>
+            </div>
             <div className="whole_chart">
                 <h2>new songs</h2>
                 <div id="new_song_list" className="song_list">

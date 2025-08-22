@@ -52,8 +52,26 @@ function App() {
             <div className={result ? 'none' : ''}>{msg}</div>
             {result &&
                 <>
-                    <div id="user_name">{userInfo.name}</div>
-                    <div id="user_rating">Rating: {userInfo.rating}</div>
+                    <div className="flex_center">
+                        <img src={userInfo.icon} className="icon"/>
+                        <div>
+                            <div className="trophy">
+                                <img src={userInfo.trophyImg} style={{'width': '100%'}}/>
+                                <div className="trophy_text text_center">{userInfo.trophy}</div>
+                            </div>
+                            <div className="name text_center">{userInfo.name}</div>
+                            <div className="flex_center">
+                                <div className="rating_block">
+                                    <img src={userInfo.ratingFrame} style={{'width': '100%'}}/>
+                                    <div className="rating_num">{userInfo.rating}</div>
+                                </div>
+                                <img src={userInfo.courseImg} className="c_img"/>
+                                <img src={userInfo.classImg} className="c_img"/>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </>
             }
             {result &&

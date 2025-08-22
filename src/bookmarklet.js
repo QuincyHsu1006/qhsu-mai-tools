@@ -43,9 +43,19 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
 
         userInfoData = {};
 
-        userInfoData.name = document.querySelector('.name_block').textContent;
-        userInfoData.rating = Number(document.querySelector('.rating_block').textContent);
+        userInfoData.icon = namePlateDOM.querySelector('img.w_112').src;
+        userInfoData.name = namePlateDOM.querySelector('.name_block').textContent;
+        userInfoData.rating = Number(namePlateDOM.querySelector('.rating_block').textContent);
+        userInfoData.trophy = namePlateDOM.querySelector(".trophy_inner_block > span").textContent;
+        let trophyDOM = namePlateDOM.querySelector(".trophy_block");
+        let style = getComputedStyle(trophyDOM);
+        userInfoData.trophyImg = style.background.match(/url\(["']?(.*?)["']?\)/)[1];
 
+        userInfoData.ratingFrame = namePlateDOM.querySelector('img.h_30.f_r').src;
+        userInfoData.courseImg = namePlateDOM.querySelector('img.h_35.f_l').src;
+        userInfoData.classImg = namePlateDOM.querySelector('img.p_l_10.h_35.f_l').src;
+
+        console.log(userInfoData);
     }
 
     const fetchScoreData = async () => {

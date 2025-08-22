@@ -18,3 +18,58 @@
 .navbar_btn:hover{
     background-color: #dddddd;
 }
+
+.flex_center {
+    display: flex;
+    align-items: center;
+}
+
+.text_center {
+    text-align: center;
+}
+
+.icon {
+    width: 170px;
+    height: 100%;
+    margin: 15px;
+}
+
+.trophy {
+    position: relative;
+    margin: 15px;
+}
+
+.trophy_text {
+    position: absolute;
+    top: 6%;
+    width: 100%;
+    font-size: larger;
+    color: white;
+    text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0, black 0px 1px 0, black 0 -1px 0, black -1px 0 0, black 1px 0 0;;
+}
+
+.name {
+    font-size: 25px;
+}
+
+.rating_block {
+    position: relative;
+    width: 175px;
+}
+
+.rating_num {
+    position: absolute;
+    top: 10%;
+    right: 6%;
+    color: white;
+    font-size: 180%;
+}
+
+.c_img {
+    width: 100px;
+    margin: 5px;
+}
+
+.class_img {
+    margin: 5px;
+}
