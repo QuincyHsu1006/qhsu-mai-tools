@@ -1,3 +1,14 @@
 .plate_btn {
-    margin: 5px;
+    margin: 7px;
+    font-size: large;
+    font-family: inherit;
+    padding: 7px 5px 5px 5px;
+    width: 80px;
+    border-radius: 8px;
+    border: solid 1px #aaaaaa;
+}
+
+.diff_btn {
+    width: 100px;
+    background-color: var(--bg-color);
 }

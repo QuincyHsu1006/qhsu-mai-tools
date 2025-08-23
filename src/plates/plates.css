@@ -1,3 +1,14 @@
+.kanji_options {
+    font-size: large;
+    margin: 15px;
+}
+
+select {
+    margin-left: 20px;
+    font-size: large;
+    font-family: inherit;
+}
+
 .whole_plateList{
     width:1100px;
     display: flex;

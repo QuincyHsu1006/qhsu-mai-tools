@@ -8,15 +8,20 @@
 
 .navbar_btn {
     margin: 0px 10px 0px 10px;
-    padding: 7px;
+    padding: 9px 7px 7px 7px;
     width: 100px;
     border-radius: 8px;
     border: solid 1px #aaaaaa;
     font-size: larger;
+    font-family: inherit;
 }
 
-.navbar_btn:hover{
-    background-color: #dddddd;
+.btn:hover{
+    filter: brightness(90%);
+}
+
+.btn:active{
+    filter: brightness(80%);
 }
 
 .flex_center {
