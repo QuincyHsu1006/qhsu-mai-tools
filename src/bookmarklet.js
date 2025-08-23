@@ -54,8 +54,6 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
         userInfoData.ratingFrame = namePlateDOM.querySelector('img.h_30.f_r').src;
         userInfoData.courseImg = namePlateDOM.querySelector('img.h_35.f_l').src;
         userInfoData.classImg = namePlateDOM.querySelector('img.p_l_10.h_35.f_l').src;
-
-        console.log(userInfoData);
     }
 
     const fetchScoreData = async () => {

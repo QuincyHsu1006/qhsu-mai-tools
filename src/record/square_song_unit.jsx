@@ -1,8 +1,9 @@
 import { DifficultyColors, APAchievements, SyncAchievements } from "../common/songs"
-import { songFilter } from "../common/filter";
+import { findSongFilterFlagByKey, songFilter } from "../common/filter";
 import "./square_song_unit.css"
 
 function SquareSongUnit({song, filterKey, filterFlag}){
+    if(filterFlag === null) filterFlag = findSongFilterFlagByKey(filterKey);
     let flag = songFilter(song, filterKey, filterFlag);
 
     return (

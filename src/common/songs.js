@@ -26,7 +26,8 @@ export const SyncAchievements = {
 }
 
 export const StarAchievements = {
-    //'6★': 0.99,
+    //'6★': 99,
+    //'5.5★': 98,
     '5★': 97,
     '4★': 95,
     '3★': 93,
@@ -52,6 +53,41 @@ export const Versions = [
         "FESTiVAL", "FESTiVAL PLUS", "BUDDiES",
         "BUDDiES PLUS", "PRiSM", "PRiSM PLUS"
     ];
+
+export const PlateKanji = {
+    "真": "maimai ~ maimai PLUS",
+    "超": "GreeN",
+    "檄": "GreeN PLUS",
+    "橙": "ORANGE",
+    "暁": "ORANGE PLUS",
+    "桃": "PiNK",
+    "櫻": "PiNK PLUS",
+    "紫": "MURASAKi",
+    "菫": "MURASAKi PLUS",
+    "白": "MiLK",
+    "雪": "MiLK PLUS",
+    "輝": "FiNALE",
+    "舞/覇者": "maimai ~ FiNALE",
+    "熊": "でらっくす",
+    "華": "でらっくす PLUS",
+    "爽": "スプラッシュ",
+    "煌": "スプラッシュ PLUS",
+    "宙": "UNiVERSE",
+    "星": "UNiVERSE PLUS",
+    "祭": "FESTiVAL",
+    "祝": "FESTiVAL PLUS",
+    "双": "BUDDiES",
+    "宴": "BUDDiES PLUS",
+    "鏡": "PRiSM",
+    "？": "PRiSM PLUS"
+}
+
+export const PlateAchievements = {
+    "将": 'SSS',
+    "極": 'FC',
+    "神": 'AP',
+    "舞舞": 'FDX'
+}
 
 export class Song {
     constructor(title, type, version, score, dxScore, difficulty, internalLevel,
