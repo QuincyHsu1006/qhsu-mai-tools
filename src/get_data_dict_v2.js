@@ -23,7 +23,8 @@ import { fetchPage, fetchJSON } from './common/fetch.js';
                     song['title'] = element.songId;
                     song['type'] = type;
                     song['genre'] = element.category;
-                    const ver = ("version" in Chart[0].regionOverrides.intl) ? Chart[0].regionOverrides.intl.version : Chart[0].version;
+                    const ver = ("version" in Chart[0].regionOverrides.intl) ? Chart[0].regionOverrides.intl.version :
+                        ("version" in Chart[0] ? Chart[0].version : element.version);
                     song['version'] = Versions.findIndex(x => x.version === ver);
                     song['lv'] = [];
                     song['imgURL'] = element.imageName;

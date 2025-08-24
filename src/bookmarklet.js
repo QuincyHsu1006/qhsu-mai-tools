@@ -29,10 +29,10 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
 
 
     const fetchSongDict = async () => {
-        if(DataJSON !== null) return DataJSON;
+        if(DbJSON !== null) return DbJSON;
 
         console.log('Fetching song dict...');
-        DataJSON = await fetchJSON(MAIN_LINK + 'song_data_dict.json');
+        DbJSON = await fetchJSON(MAIN_LINK + 'song_data_dict.json');
     }
 
     const fetchUserInfoData = async () => {
@@ -80,7 +80,8 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
                 const dxBefore = dxScoreBlk ? dxScoreBlk.textContent.replace(/[,\s]/g, "").split("/") : [];
                 const dxScore = dxBefore.length > 0 ? Math.floor((Number(dxBefore[0]) / Number(dxBefore[1])) * 10000) / 100 : -1;
 
-                const data = DataJSON.find(d => d.title === title && d.type === type);
+                const idx = DbJSON.findIndex(d => d.title === title && d.type === type);
+                const data = idx > 0 ? DbJSON[idx] : null;
 
                 const version = data?.version || -1;
                 const internalLevel = data? data.lv[i] : 0;
@@ -124,9 +125,24 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
                 }
                 let s = new Song(title, type.toUpperCase(), version, score, dxScore, Difficulties[i], internalLevel, imgURL, apFlag, syncFlag);
                 scoreData.push(s);
+
+                DbJSON[idx]['visited'] = true;
             })
 
         }
+
+        DbJSON.filter(data => !('visited' in data)).forEach(data => {
+            for(let i = 0; i < data.lv.length; i++){
+                const title = data.title;
+                const type = data.type.toUpperCase();
+                const ver = data.version;
+                const diff = Difficulties[i];
+                const internalLv = data.lv[i];
+                const imgURL = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${data?.imgURL}`;
+
+                scoreData.push(new Song(title, type, ver, -1, -1, diff, internalLv, imgURL, 0, 0));
+            }
+        })
     };
 
 
@@ -161,7 +177,7 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
 
     const url = new URL(location.href);
 
-    let DataJSON = null
+    let DbJSON = null
     let childWin = null;
     let userInfoData = null;
     let scoreData = null;

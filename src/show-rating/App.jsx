@@ -6,6 +6,7 @@ import Layout from '../components/layout.jsx';
 import B50Visualizer from '../b50-visualizer/b50_visualizer.jsx';
 import Record from '../record/record.jsx';
 import Plates from '../plates/plates.jsx';
+import { Difficulties } from '../common/songs.js';
 
 
 var userInfo = null;
@@ -35,7 +36,12 @@ function App() {
                 userInfo = data[0];
                 scoreData = data[1];
 
-                scoreData.sort((a, b) => {return b.internalLevel - a.internalLevel});
+                const sortByDefault = (a, b) => {
+                    return Difficulties.indexOf(b.difficulty) - Difficulties.indexOf(a.difficulty) ||
+                    b.internalLevel - a.internalLevel;
+                }
+
+                scoreData.sort(sortByDefault);
 
                 b50 = GetB50(scoreData);
 
