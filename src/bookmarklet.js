@@ -82,8 +82,8 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
 
                 const data = DataJSON.find(d => d.title === title && d.type === type);
 
-                const version = data?.version || "";
-                const internalLevel = data? data[Difficulties[i]] : 0;
+                const version = data?.version || -1;
+                const internalLevel = data? data.lv[i] : 0;
                 const imgURL = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${data?.imgURL}` || "";
 
                 let apFlag = 0;

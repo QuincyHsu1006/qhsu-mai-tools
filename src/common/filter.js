@@ -38,12 +38,12 @@ export function songFilter(song, filterKey, filterFlag){
 
     if(filterFlag === 'plate' || filterKey in PlateKanji){
         if(filterKey === "真"){
-            return song.version === "maimai PLUS" || (song.version === "maimai" && song.title !== 'ジングルベル');
+            return song.version <= 1 && song.title !== 'ジングルベル';
         }
         else if(filterKey === "舞/覇者"){
-            return Versions.indexOf(song.version) <= 12;
+            return song.version <= 12;
         }
-        else return song.version === PlateKanji[filterKey];
+        else return Versions[song.version] === PlateKanji[filterKey];
     }
 
     return false;

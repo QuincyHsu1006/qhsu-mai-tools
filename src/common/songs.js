@@ -96,7 +96,6 @@ export class Song {
         //type: string
         this.title = title;
         this.type = type;
-        this.version = version;
         this.difficulty = difficulty;
         this.imgURL = imgURL;
 
@@ -106,6 +105,7 @@ export class Song {
         this.dxScore = dxScore;
 
         //type: int
+        this.version = version;
         this.apFlag = apFlag;
         this.syncFlag = syncFlag;
         this.rating = calculateRating(score, internalLevel);

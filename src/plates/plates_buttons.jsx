@@ -2,9 +2,9 @@ import { PlateAchievements } from "../common/songs";
 import './plates_buttons.css';
 import '../show-rating/App.css';
 
-function PlatesButtons({version, click}){
+function PlatesButtons({kanji, click}){
 
-    if (version === "真"){
+    if (kanji === "真"){
         return (
             <>
                 <button className="plate_btn btn" onClick={()=>{click('FC')}}>真極</button>
@@ -13,7 +13,7 @@ function PlatesButtons({version, click}){
             </>
         )
     }
-    if(version === "舞/覇者"){
+    if(kanji === "舞/覇者"){
         return (
             <>
                 <button className="plate_btn btn" onClick={()=>{click('clear')}}>覇者</button>
@@ -30,7 +30,7 @@ function PlatesButtons({version, click}){
             {
                 Object.entries(PlateAchievements).map(([key, value]) => {
                     return (
-                        <button className="plate_btn btn" onClick={()=>{click(value)}}>{version}{key}</button>
+                        <button className="plate_btn btn" onClick={()=>{click(value)}}>{kanji}{key}</button>
                     )
                 })
             }

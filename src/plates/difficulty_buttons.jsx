@@ -2,7 +2,7 @@ import { DifficultyColors } from '../common/songs';
 import './plates_buttons.css';
 import '../show-rating/App.css';
 
-function DifficultyButtons({version, click}){
+function DifficultyButtons({kanji, click}){
     return (
         <>
             <button className="plate_btn diff_btn btn"
@@ -22,7 +22,7 @@ function DifficultyButtons({version, click}){
                 onClick={()=>{click('master')}}>master
             </button>
 
-            {version === "舞/覇者" &&
+            {kanji === "舞/覇者" &&
                 <button className="plate_btn diff_btn btn"
                     style={{'--bg-color': DifficultyColors['remaster']}}
                     onClick={()=>{click('remaster')}}>remaster

@@ -40,12 +40,12 @@ function Plates({scoreData}) {
 
             <div className="plate">
                 { kanji !== "" &&
-                    <PlatesButtons version={kanji} click={handlePlateBtn}/>
+                    <PlatesButtons kanji={kanji} click={handlePlateBtn}/>
                 }
             </div>
             <div>
                 { plateType !== null &&
-                        <DifficultyButtons version={kanji} click={SetDiff}/>
+                        <DifficultyButtons kanji={kanji} click={SetDiff}/>
                 }
             </div>
             <div className="whole_plateList">
