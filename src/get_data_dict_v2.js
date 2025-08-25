@@ -7,6 +7,14 @@ import { fetchPage, fetchJSON } from './common/fetch.js';
     const ArcadeSongsDB = DB.songs;
     const Versions = DB.versions;
     const Types = ['std', 'dx'];
+    const category_abbr = {
+        "POPS＆アニメ": "PA",
+        "niconico＆ボーカロイド": "nico",
+        "東方Project": "東方",
+        "ゲーム＆バラエティ": "GV",
+        "maimai": "mai",
+        "オンゲキ＆CHUNITHM": "GC"
+    };
 
     let songDict = [];
 
@@ -20,9 +28,9 @@ import { fetchPage, fetchJSON } from './common/fetch.js';
 
                 //to check if international ver. has dx or std chart of each songs.
                 if(Chart.length > 0 && Chart[0].regions.intl === true){
-                    song['title'] = element.songId;
+                    song['title'] = element.title;
                     song['type'] = type;
-                    song['genre'] = element.category;
+                    song['genre'] = category_abbr[element.category];
                     const ver = ("version" in Chart[0].regionOverrides.intl) ? Chart[0].regionOverrides.intl.version :
                         ("version" in Chart[0] ? Chart[0].version : element.version);
                     song['version'] = Versions.findIndex(x => x.version === ver);

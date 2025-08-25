@@ -4,6 +4,15 @@ import { fetchPage, fetchJSON } from './common/fetch.js';
 //const MAIN_LINK = 'https://quincyhsu1006.github.io/qhsu-mai-tools/';
 const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
 
+const category_abbr = {
+    "POPS＆ANIME": "PA",
+    "niconico＆VOCALOID™": "nico",
+    "東方Project": "東方",
+    "GAME＆VARIETY": "GV",
+    "maimai": "mai",
+    "オンゲキ＆CHUNITHM": "GC"
+};
+
 ( async function() {
 
     const createButtons = () => {
@@ -65,68 +74,77 @@ const MAIN_LINK = 'http://localhost:5173/qhsu-mai-tools/';
             console.log(`Fetching data for ${Difficulties[i]}...`);
             const resDOM = await fetchPage(`${url.origin}/maimai-mobile/record/musicGenre/search/?genre=99&diff=${i}`);
 
-            const blocks = resDOM.querySelectorAll('.w_450.m_15.p_r.f_0');
+            const List = resDOM.querySelector('.wrapper.main_wrapper.t_c.o_v');
+            const blocks = List.querySelectorAll('div');
+
+            let curr_genre = null;
 
             blocks.forEach(block => {
-
-                const title = block.querySelector('.music_name_block').textContent;
-                const type = block.querySelector('.music_kind_icon[src*="music_dx"]') ? 'dx' : 'std';
-
-                const scoreBlk = block.querySelector('.music_score_block.w_112');
-                const score = scoreBlk ? Number(scoreBlk.textContent.slice(0, -1)) : -1;
-
-                const dxScoreBlk = block.querySelector('.music_score_block.w_190');
-
-                const dxBefore = dxScoreBlk ? dxScoreBlk.textContent.replace(/[,\s]/g, "").split("/") : [];
-                const dxScore = dxBefore.length > 0 ? Math.floor((Number(dxBefore[0]) / Number(dxBefore[1])) * 10000) / 100 : -1;
-
-                const idx = DbJSON.findIndex(d => d.title === title && d.type === type);
-                const data = idx > 0 ? DbJSON[idx] : null;
-
-                const version = data?.version || -1;
-                const internalLevel = data? data.lv[i] : 0;
-                const imgURL = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${data?.imgURL}` || "";
-
-                let apFlag = 0;
-                let syncFlag = 0;
-
-                if(scoreBlk) {
-                    const flagBlk = Array.from(block.querySelectorAll('img.h_30.f_r')).map(el => el.src);
-
-                    if(flagBlk.some(src => src.includes('music_icon_fc'))){
-                        apFlag = 1;
-                    }
-                    if(flagBlk.some(src => src.includes('music_icon_fcp'))){
-                        apFlag = 2;
-                    }
-                    if(flagBlk.some(src => src.includes('music_icon_ap'))){
-                        apFlag = 3;
-                    }
-                    if(flagBlk.some(src => src.includes('music_icon_app'))){
-                        apFlag = 4;
-                    }
-
-                    if(flagBlk.some(src => src.includes('music_icon_sync'))){
-                        syncFlag = 1;
-                    }
-                    if(flagBlk.some(src => src.includes('music_icon_fs'))){
-                        syncFlag = 2;
-                    }
-                    if(flagBlk.some(src => src.includes('music_icon_fsp'))){
-                        syncFlag = 3;
-                    }
-                    if(flagBlk.some(src => src.includes('music_icon_fdx'))){
-                        syncFlag = 4;
-                    }
-                    if(flagBlk.some(src => src.includes('music_icon_fdxp'))){
-                        syncFlag = 5;
-                    }
-
+                if(block.classList.contains('screw_block')){
+                    curr_genre = category_abbr[block.textContent];
                 }
-                let s = new Song(title, type.toUpperCase(), version, score, dxScore, Difficulties[i], internalLevel, imgURL, apFlag, syncFlag);
-                scoreData.push(s);
+                else if(block.classList.contains('w_450')){
 
-                DbJSON[idx]['visited'] = true;
+                    const title = block.querySelector('.music_name_block').textContent;
+                    const type = block.querySelector('.music_kind_icon[src*="music_dx"]') ? 'dx' : 'std';
+
+                    const scoreBlk = block.querySelector('.music_score_block.w_112');
+                    const score = scoreBlk ? Number(scoreBlk.textContent.slice(0, -1)) : -1;
+
+                    const dxScoreBlk = block.querySelector('.music_score_block.w_190');
+
+                    const dxBefore = dxScoreBlk ? dxScoreBlk.textContent.replace(/[,\s]/g, "").split("/") : [];
+                    const dxScore = dxBefore.length > 0 ? Math.floor((Number(dxBefore[0]) / Number(dxBefore[1])) * 10000) / 100 : -1;
+
+                    const idx = DbJSON.findIndex(d => d.title === title && d.type === type && d.genre === curr_genre);
+                    const data = idx >= 0 ? DbJSON[idx] : null;
+
+                    const version = data ? data.version : -1;
+                    const internalLevel = data ? data.lv[i] : 0;
+                    const imgURL = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${data?.imgURL}` || "";
+
+                    let apFlag = 0;
+                    let syncFlag = 0;
+
+                    if(scoreBlk) {
+                        const flagBlk = Array.from(block.querySelectorAll('img.h_30.f_r')).map(el => el.src);
+
+                        if(flagBlk.some(src => src.includes('music_icon_fc'))){
+                            apFlag = 1;
+                        }
+                        if(flagBlk.some(src => src.includes('music_icon_fcp'))){
+                            apFlag = 2;
+                        }
+                        if(flagBlk.some(src => src.includes('music_icon_ap'))){
+                            apFlag = 3;
+                        }
+                        if(flagBlk.some(src => src.includes('music_icon_app'))){
+                            apFlag = 4;
+                        }
+
+                        if(flagBlk.some(src => src.includes('music_icon_sync'))){
+                            syncFlag = 1;
+                        }
+                        if(flagBlk.some(src => src.includes('music_icon_fs'))){
+                            syncFlag = 2;
+                        }
+                        if(flagBlk.some(src => src.includes('music_icon_fsp'))){
+                            syncFlag = 3;
+                        }
+                        if(flagBlk.some(src => src.includes('music_icon_fdx'))){
+                            syncFlag = 4;
+                        }
+                        if(flagBlk.some(src => src.includes('music_icon_fdxp'))){
+                            syncFlag = 5;
+                        }
+
+                    }
+                    let s = new Song(title, type.toUpperCase(), version, score, dxScore, Difficulties[i], internalLevel, imgURL, apFlag, syncFlag);
+                    scoreData.push(s);
+
+                    DbJSON[idx]['visited'] = true;
+                }
+
             })
 
         }
