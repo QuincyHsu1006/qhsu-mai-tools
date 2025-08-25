@@ -14,7 +14,6 @@ var scoreData = null;
 var b50 = [];
 
 function App() {
-    const [msg, setMsg] = useState('正在讀取資料...');
     const [result, setResult] = useState(false);
 
     const [minValue, setMinValue] = useState(14.0);
@@ -37,8 +36,8 @@ function App() {
                 scoreData = data[1];
 
                 const sortByDefault = (a, b) => {
-                    return Difficulties.indexOf(b.difficulty) - Difficulties.indexOf(a.difficulty) ||
-                    b.internalLevel - a.internalLevel;
+                    return b.internalLevel - a.internalLevel ||
+                        Difficulties.indexOf(b.difficulty) - Difficulties.indexOf(a.difficulty);
                 }
 
                 scoreData.sort(sortByDefault);
@@ -55,7 +54,7 @@ function App() {
     return (
         <>
             <h1>簡易查分小工具</h1>
-            <div className={result ? 'none' : ''}>{msg}</div>
+            {!result && <div>正在讀取資料...</div>}
             {result &&
                 <>
                     <div className="flex_center">

@@ -40,6 +40,9 @@ export function songFilter(song, filterKey, filterFlag){
         if(filterKey === "真"){
             return song.version <= 1 && song.title !== 'ジングルベル';
         }
+        else if(filterKey === "菫"){
+            return song.version === 9 && song.title !== '前前前世';
+        }
         else if(filterKey === "舞/覇者"){
             return song.version <= 12;
         }
